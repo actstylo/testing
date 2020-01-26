@@ -1,0 +1,9 @@
+---
+- name: check uplinks json
+  shell: "lldp json"
+  register: command_output
+  ignore_errors: yes
+  become: yes
+- local_action: copy content={{ command_output.stdout_lines | to_nice_json }} dest=ztp_verifyuplinks
+  ignore_errors: yes
+

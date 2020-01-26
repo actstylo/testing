@@ -1,0 +1,9 @@
+---
+- name: check clag json
+  shell: "net json"
+  register: command_output
+  ignore_errors: yes
+  become: yes
+- local_action: copy content={{ command_output.stdout_lines | to_nice_json }} dest=ztp_verifyclag
+  ignore_errors: yes
+
